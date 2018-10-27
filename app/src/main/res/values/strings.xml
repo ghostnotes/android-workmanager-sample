@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WorkManager Test</string>
+
+    <string name="message_hi">Hi!</string>
+    <string name="message_processing">Processing...</string>
+
+    <string name="button_start_workers">start workers</string>
+
+</resources>
