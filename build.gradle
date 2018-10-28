@@ -18,6 +18,10 @@ buildscript {
     versions.junit = '4.12'
     versions.testRunner = '1.0.2'
     versions.espresso = '3.0.2'
+    versions.mockito = '2.23.0'
+    versions.mockitoKotlin = '2.0.0-RC3'
+    versions.mockitoAndroid = '2.23.0'
+    versions.coreTesting = '1.1.1'
 
     repositories {
         google()

@@ -1,4 +1,4 @@
-package co.ghostnotes.test
+package co.ghostnotes.sample.workmanager
 
 import org.junit.Test
 

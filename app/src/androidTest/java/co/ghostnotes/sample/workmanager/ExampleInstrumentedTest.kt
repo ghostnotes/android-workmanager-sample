@@ -1,4 +1,4 @@
-package co.ghostnotes.test
+package co.ghostnotes.sample.workmanager
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

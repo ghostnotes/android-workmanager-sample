@@ -1,12 +1,9 @@
 package co.ghostnotes.sample.workmanager.ui
 
-import android.content.Context
-import co.ghostnotes.sample.workmanager.R
+interface TextProvider {
 
-class TextProvider(private val context: Context) {
+    fun getProcessing(): String
 
-    fun getProcessing(): String = context.getString(R.string.message_processing)
-
-    fun getHi(): String = context.getString(R.string.message_hi)
+    fun getHi(): String
 
 }

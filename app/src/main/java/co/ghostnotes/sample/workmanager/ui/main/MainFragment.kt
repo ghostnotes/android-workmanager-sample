@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.work.WorkStatus
 import co.ghostnotes.sample.workmanager.R
 import co.ghostnotes.sample.workmanager.databinding.FragmentMainBinding
-import co.ghostnotes.sample.workmanager.ui.TextProvider
+import co.ghostnotes.sample.workmanager.ui.DefaultTextProvider
 import timber.log.Timber
 
 class MainFragment : Fragment(), MainContract.View {
@@ -33,8 +33,8 @@ class MainFragment : Fragment(), MainContract.View {
         Timber.d("### on activity created.")
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, MainViewModelFactory(TextProvider(context!!))).get(MainViewModel::class.java)
-        viewModel.outputStatus.observe(this, OutputStatusObserver(this))
+        viewModel = ViewModelProviders.of(this, MainViewModelFactory(DefaultTextProvider(context!!))).get(MainViewModel::class.java)
+        viewModel.workStatuses.observe(this, OutputStatusObserver(this))
 
         binding.viewModel = viewModel
         binding.setLifecycleOwner(this)

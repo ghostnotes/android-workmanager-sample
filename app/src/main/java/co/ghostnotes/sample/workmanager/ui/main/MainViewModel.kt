@@ -17,7 +17,7 @@ class MainViewModel(textProvider: TextProvider, private val workManager: WorkMan
         private const val BASE_WORK_NAME = "co.ghostnotes.sample.workmanager"
         private const val WORK_NAME_TEST = "$BASE_WORK_NAME.TEST"
 
-        private const val WORK_TAG_NAME_TEST = "WORK_TAG_NAME_TEST"
+        internal const val WORK_TAG_NAME_TEST = "WORK_TAG_NAME_TEST"
     }
 
     private val processing: MutableLiveData<Boolean> = MutableLiveData()
@@ -28,11 +28,11 @@ class MainViewModel(textProvider: TextProvider, private val workManager: WorkMan
         }
     }
 
-    internal val outputStatus: LiveData<List<WorkStatus>>
+    internal val workStatuses: LiveData<List<WorkStatus>>
 
     init {
         processing.value = false
-        outputStatus = workManager.getStatusesByTagLiveData(WORK_TAG_NAME_TEST)
+        workStatuses = workManager.getStatusesByTagLiveData(WORK_TAG_NAME_TEST)
     }
 
     val messageText: LiveData<String> = Transformations.map(processing) {
@@ -58,8 +58,6 @@ class MainViewModel(textProvider: TextProvider, private val workManager: WorkMan
             //.setConstraints(constraints)
             .addTag(WORK_TAG_NAME_TEST)
             .build()
-        //continuation = continuation.then(secondWorker)
-        //continuation.enqueue()
 
         workManager.beginUniqueWork(WORK_NAME_TEST, ExistingWorkPolicy.REPLACE, firstWorker)
             .then(secondWorker)
