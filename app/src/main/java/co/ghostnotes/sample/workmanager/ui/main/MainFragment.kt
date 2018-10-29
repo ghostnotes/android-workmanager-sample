@@ -16,6 +16,8 @@ import timber.log.Timber
 
 class MainFragment : Fragment(), MainContract.View {
     companion object {
+        const val FRAGMENT_TAG = "co.ghostnotes.sample.workmanager.ui.main.MainFragment"
+
         fun newInstance() = MainFragment()
     }
 
@@ -34,7 +36,7 @@ class MainFragment : Fragment(), MainContract.View {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProviders.of(this, MainViewModelFactory(DefaultTextProvider(context!!))).get(MainViewModel::class.java)
-        viewModel.workStatuses.observe(this, OutputStatusObserver(this))
+        viewModel.workStatuses.observe(this, WorkStatusObserver(this))
 
         binding.viewModel = viewModel
         binding.setLifecycleOwner(this)
@@ -44,7 +46,7 @@ class MainFragment : Fragment(), MainContract.View {
         viewModel.setProcessing(processing)
     }
 
-    internal class OutputStatusObserver(private val view: MainContract.View): Observer<List<WorkStatus>> {
+    internal class WorkStatusObserver(private val view: MainContract.View): Observer<List<WorkStatus>> {
         override fun onChanged(t: List<WorkStatus>?) {
             if (t == null || t.isEmpty()) return
 
