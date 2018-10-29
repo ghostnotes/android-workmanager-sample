@@ -15,7 +15,7 @@ class SecondWorker(context: Context, workerParams: WorkerParameters): Worker(con
         Timber.d("### do work.")
 
         return try {
-            workerHelper.heavyProcess()
+            workerHelper.normalProcess()
             Result.SUCCESS
         } catch (e: InterruptedException) {
             Timber.e(e)

@@ -5,5 +5,6 @@
     <string name="message_processing">Processing...</string>
 
     <string name="button_start_workers">start workers</string>
+    <string name="button_cancel_workers">cancel workers</string>
 
 </resources>

@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("co.ghostnotes.test", appContext.packageName)
+        assertEquals("co.ghostnotes.sample.workmanager", appContext.packageName)
     }
 }

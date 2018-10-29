@@ -15,7 +15,7 @@ class FirstWorker(context: Context, workerParams: WorkerParameters): Worker(cont
         Timber.d("### do work.")
 
         return try {
-            workerHelper.heavyProcess()
+            workerHelper.lightProcess()
             Result.SUCCESS
         } catch (e: InterruptedException) {
             Timber.e(e)

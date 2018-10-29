@@ -101,4 +101,13 @@ class MainViewModelTest {
         verify(mockWorkContinuation, times(1)).enqueue()
     }
 
+    @Test
+    fun cancelWorkers() {
+        // Call
+        viewModel.cancelWorkers()
+
+        // Test
+        verify(mockWorkManager, times(1)).cancelUniqueWork(MainViewModel.WORK_NAME_TEST)
+    }
+
 }

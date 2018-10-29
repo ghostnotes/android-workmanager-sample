@@ -36,20 +36,24 @@ class FirstWorkerTest {
         val result = worker.doWork()
 
         // Test
-        verify(mockWorkerHelper, times(1)).heavyProcess()
+        verify(mockWorkerHelper, times(1)).lightProcess()
+        verify(mockWorkerHelper, never()).normalProcess()
+        verify(mockWorkerHelper, never()).heavyProcess()
         assertThat(result, `is`(ListenableWorker.Result.SUCCESS))
     }
 
     @Test
     fun doWork_failure() {
         // Mock
-        `when`(mockWorkerHelper.heavyProcess()).thenThrow(InterruptedException())
+        `when`(mockWorkerHelper.lightProcess()).thenThrow(InterruptedException())
 
         // Call
         val result = worker.doWork()
 
         // Test
-        verify(mockWorkerHelper, times(1)).heavyProcess()
+        verify(mockWorkerHelper, times(1)).lightProcess()
+        verify(mockWorkerHelper, never()).normalProcess()
+        verify(mockWorkerHelper, never()).heavyProcess()
         assertThat(result, `is`(ListenableWorker.Result.FAILURE))
     }
 

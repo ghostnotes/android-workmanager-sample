@@ -15,27 +15,27 @@ class MainViewModel(textProvider: TextProvider, private val workManager: WorkMan
 
     companion object {
         private const val BASE_WORK_NAME = "co.ghostnotes.sample.workmanager"
-        private const val WORK_NAME_TEST = "$BASE_WORK_NAME.TEST"
+        internal const val WORK_NAME_TEST = "$BASE_WORK_NAME.TEST"
 
         internal const val WORK_TAG_NAME_TEST = "WORK_TAG_NAME_TEST"
     }
 
-    private val processing: MutableLiveData<Boolean> = MutableLiveData()
-    val isProcessing = processing
+    private val _processing: MutableLiveData<Boolean> = MutableLiveData()
+    val isProcessing = _processing
     fun setProcessing(value: Boolean) {
-        if (processing.value != value) {
-            processing.value = value
+        if (_processing.value != value) {
+            _processing.value = value
         }
     }
 
     internal val workStatuses: LiveData<List<WorkStatus>>
 
     init {
-        processing.value = false
+        _processing.value = false
         workStatuses = workManager.getStatusesByTagLiveData(WORK_TAG_NAME_TEST)
     }
 
-    val messageText: LiveData<String> = Transformations.map(processing) {
+    val messageText: LiveData<String> = Transformations.map(_processing) {
         if (it) {
             textProvider.getProcessing()
         } else {
@@ -47,7 +47,7 @@ class MainViewModel(textProvider: TextProvider, private val workManager: WorkMan
         Timber.d("### start workers.")
         workManager.cancelAllWork()
 
-        processing.value = true
+        _processing.value = true
 
         val firstWorker = OneTimeWorkRequest.from(FirstWorker::class.java)
         val secondWorker = OneTimeWorkRequest.from(SecondWorker::class.java)
@@ -63,6 +63,10 @@ class MainViewModel(textProvider: TextProvider, private val workManager: WorkMan
             .then(secondWorker)
             .then(thirdWorker)
             .enqueue()
+    }
+
+    fun cancelWorkers() {
+        workManager.cancelUniqueWork(WORK_NAME_TEST)
     }
 
 }

@@ -37,6 +37,8 @@ class ThirdWorkerTest {
 
         // Test
         verify(mockWorkerHelper, times(1)).heavyProcess()
+        verify(mockWorkerHelper, never()).lightProcess()
+        verify(mockWorkerHelper, never()).normalProcess()
         assertThat(result, `is`(ListenableWorker.Result.SUCCESS))
     }
 
@@ -50,6 +52,8 @@ class ThirdWorkerTest {
 
         // Test
         verify(mockWorkerHelper, times(1)).heavyProcess()
+        verify(mockWorkerHelper, never()).lightProcess()
+        verify(mockWorkerHelper, never()).normalProcess()
         assertThat(result, `is`(ListenableWorker.Result.FAILURE))
     }
 

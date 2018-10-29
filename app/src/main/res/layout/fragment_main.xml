@@ -35,8 +35,20 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/button_start_workers"
             android:onClick="@{() -> viewModel.startWorkers()}"
-            app:enabledUnless="@{viewModel.isProcessing}"
+            app:disabledUnless="@{viewModel.isProcessing}"
             app:layout_constraintTop_toBottomOf="@+id/message_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/cancel_workers_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@string/button_cancel_workers"
+            android:onClick="@{() -> viewModel.cancelWorkers()}"
+            app:disabledUnless="@{!viewModel.isProcessing}"
+            app:layout_constraintTop_toBottomOf="@+id/start_workers_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

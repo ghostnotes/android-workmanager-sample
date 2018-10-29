@@ -6,7 +6,7 @@ import android.view.View
 object BindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("app:enabledUnless")
+    @BindingAdapter("app:disabledUnless")
     fun disabledUnless(view: View, enabled: Boolean) {
         view.isEnabled = !enabled
     }
